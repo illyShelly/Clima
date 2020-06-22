@@ -27,11 +27,26 @@ class WeatherViewController: UIViewController, UITextFieldDelegate {
     print(searchTextField.text!)
   }
   
+  //  the keyboard 'go' button related
   func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-    searchTextField.endEditing(true)
+    searchTextField.endEditing(true) //    closing the keyboard
     print(searchTextField.text!)
     return true // textField allowed to run
   }
   
+  //  fce for all potential textField in the app
+  func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
+    if textField.text != "" {
+      return true
+    } else {
+      textField.placeholder = "Type something"
+      return false
+    }
+  }
+  
+  func textFieldDidEndEditing(_ textField: UITextField) {
+    //    use searchTextField.text to get weather for that city
+    searchTextField.text = ""
+  }
 }
 
