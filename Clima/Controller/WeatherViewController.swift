@@ -17,25 +17,34 @@ class WeatherViewController: UIViewController, UITextFieldDelegate {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    // Do any additional setup after loading the view.
-    searchTextField.delegate = self //weatherVC's class -> textfield should report back to VC
+    
+    searchTextField.delegate = self
+    
+    //    keybord react the same work as search button ->  edit/validate text
+    //    weatherVC's class -> textfield should report back to VC
+    //    setting viewController as delegate e.x.: user start typing, end, ...
   }
   
+  //  search button
   @IBAction func searchPressed(_ sender: UIButton) {
     //    closing the keyboard
     searchTextField.endEditing(true)
     print(searchTextField.text!)
   }
   
-  //  the keyboard 'go' button related
+  //  go/return button on the keyboard
+  //  related method with delegate -> ask delegate whether texfield should processed the go/return button on the keyboard
   func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-    searchTextField.endEditing(true) //    closing the keyboard
+    //    closing the keyboard
+    searchTextField.endEditing(true)
     print(searchTextField.text!)
     return true // textField allowed to run
   }
   
-  //  fce for all potential textField in the app
+  //  'should' -> asking VC what to do? -> yes if textfield has any content already otherwise -> placeholder to write something
   func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
+    //    here textField as parameter from UITextField class
+    //    means every (potential) textField in the whole app No matter which one
     if textField.text != "" {
       return true
     } else {
@@ -44,6 +53,7 @@ class WeatherViewController: UIViewController, UITextFieldDelegate {
     }
   }
   
+  //  'clear' the textfield after search button pressed
   func textFieldDidEndEditing(_ textField: UITextField) {
     //    use searchTextField.text to get weather for that city
     searchTextField.text = ""
